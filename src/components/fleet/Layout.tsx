@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Truck, Users, FileText, GraduationCap, Wrench, ClipboardCheck, BarChart3, Bell, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { LayoutDashboard, Truck, Users, FileText, GraduationCap, Wrench, ClipboardCheck, BarChart3, Bell, Calendar, Clock, DollarSign, Award, MapPin } from 'lucide-react';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,8 +8,6 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
-  const [fleetExpanded, setFleetExpanded] = useState(true);
-  const [driversExpanded, setDriversExpanded] = useState(true);
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -19,8 +16,19 @@ export default function Layout({ children }: LayoutProps) {
     return location.pathname.startsWith(path);
   };
 
-  const navigation = [
+  const isDashboard = location.pathname === '/';
+  const isFleetSection = location.pathname.startsWith('/fleet');
+  const isDriversSection = location.pathname.startsWith('/drivers');
+  const isSchedulingSection = location.pathname.startsWith('/scheduling');
+  const isPayrollSection = location.pathname.startsWith('/payroll');
+
+  // Sidebar main sections
+  const sidebarSections = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { name: 'Fleet Management', href: '/fleet', icon: Truck },
+    { name: 'Driver Management', href: '/drivers', icon: Users },
+    { name: 'Scheduling & Attendance', href: '/scheduling', icon: Calendar },
+    { name: 'Payroll & Incentives', href: '/payroll', icon: DollarSign },
   ];
 
   const fleetNav = [
@@ -36,6 +44,27 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Documents', href: '/drivers/documents', icon: FileText },
     { name: 'Training', href: '/drivers/training', icon: GraduationCap },
   ];
+
+  const schedulingNav = [
+    { name: 'Shift Scheduling', href: '/scheduling', icon: Calendar },
+    { name: 'Attendance', href: '/scheduling/attendance', icon: Clock },
+    { name: 'Route Assignment', href: '/scheduling/routes', icon: MapPin },
+  ];
+
+  const payrollNav = [
+    { name: 'Payroll', href: '/payroll', icon: DollarSign },
+    { name: 'Incentives', href: '/payroll/incentives', icon: Award },
+  ];
+
+  const currentNavItems = isFleetSection
+    ? fleetNav
+    : isDriversSection
+      ? driverNav
+      : isSchedulingSection
+        ? schedulingNav
+        : isPayrollSection
+          ? payrollNav
+          : [];
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -57,8 +86,7 @@ export default function Layout({ children }: LayoutProps) {
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto p-4">
           <div className="space-y-1">
-            {/* Main Navigation */}
-            {navigation.map((item) => {
+            {sidebarSections.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.href);
               return (
@@ -76,78 +104,38 @@ export default function Layout({ children }: LayoutProps) {
                 </Link>
               );
             })}
-
-            {/* Fleet Management Section */}
-            <div className="pt-4">
-              <button
-                onClick={() => setFleetExpanded(!fleetExpanded)}
-                className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider hover:bg-gray-50 rounded-lg transition-colors"
-              >
-                <span>Fleet Management</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${fleetExpanded ? 'rotate-180' : ''}`} />
-              </button>
-              {fleetExpanded && (
-                <div className="mt-1 space-y-1">
-                  {fleetNav.map((item) => {
-                    const Icon = item.icon;
-                    const active = isActive(item.href);
-                    return (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                          active
-                            ? 'bg-blue-50 text-blue-600'
-                            : 'text-gray-700 hover:bg-gray-100'
-                        }`}
-                      >
-                        <Icon className="w-5 h-5" />
-                        {item.name}
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            {/* Driver Management Section */}
-            <div className="pt-4">
-              <button
-                onClick={() => setDriversExpanded(!driversExpanded)}
-                className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider hover:bg-gray-50 rounded-lg transition-colors"
-              >
-                <span>Driver Management</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${driversExpanded ? 'rotate-180' : ''}`} />
-              </button>
-              {driversExpanded && (
-                <div className="mt-1 space-y-1">
-                  {driverNav.map((item) => {
-                    const Icon = item.icon;
-                    const active = isActive(item.href);
-                    return (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                          active
-                            ? 'bg-blue-50 text-blue-600'
-                            : 'text-gray-700 hover:bg-gray-100'
-                        }`}
-                      >
-                        <Icon className="w-5 h-5" />
-                        {item.name}
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
           </div>
         </nav>
       </aside>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
+        {/* Top Navigation Bar - Only show when not on Dashboard */}
+        {!isDashboard && (
+          <div className="bg-white border-b border-gray-200">
+            <div className="flex items-center gap-1 px-6 overflow-x-auto">
+              {currentNavItems.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
+                      active
+                        ? 'border-blue-600 text-blue-600'
+                        : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         <main className="flex-1 overflow-y-auto p-8">
           {children}
         </main>

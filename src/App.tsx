@@ -16,6 +16,15 @@ import DriverOverview from './pages/drivers/DriverOverview';
 import Documents from './pages/drivers/Documents';
 import Training from './pages/drivers/Training';
 
+// Scheduling & Attendance
+import ShiftScheduling from './pages/scheduling/ShiftScheduling';
+import Attendance from './pages/scheduling/Attendance';
+import RouteAssignment from './pages/scheduling/RouteAssignment';
+
+// Payroll & Incentives
+import PayrollManagement from './pages/payroll/PayrollManagement';
+import Incentives from './pages/payroll/Incentives';
+
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +44,15 @@ function App() {
           <Route path="/drivers" element={<DriverOverview />} />
           <Route path="/drivers/documents" element={<Documents />} />
           <Route path="/drivers/training" element={<Training />} />
+
+          {/* Scheduling & Attendance */}
+          <Route path="/scheduling" element={<ShiftScheduling />} />
+          <Route path="/scheduling/attendance" element={<Attendance />} />
+          <Route path="/scheduling/routes" element={<RouteAssignment />} />
+
+          {/* Payroll & Incentives */}
+          <Route path="/payroll" element={<PayrollManagement />} />
+          <Route path="/payroll/incentives" element={<Incentives />} />
         </Routes>
       </Layout>
     </BrowserRouter>
