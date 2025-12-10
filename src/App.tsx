@@ -1,5 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/fleet/Layout';
+
+// Auth
+import Login from './pages/auth/Login';
 
 // Dashboard
 import Dashboard from './pages/dashboard/Dashboard';
@@ -49,54 +54,207 @@ import AnalyticsDashboard from './pages/analytics/AnalyticsDashboard';
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
+      <AuthProvider>
         <Routes>
-          {/* Dashboard */}
-          <Route path="/" element={<Dashboard />} />
+          {/* Public Route - Login */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Protected Routes */}
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Fleet Management */}
-          <Route path="/fleet" element={<FleetOverview />} />
-          <Route path="/fleet/maintenance" element={<Maintenance />} />
-          <Route path="/fleet/inspections" element={<Inspections />} />
-          <Route path="/fleet/utilization" element={<Utilization />} />
-          <Route path="/fleet/alerts" element={<Alerts />} />
+          <Route path="/fleet" element={
+            <ProtectedRoute>
+              <Layout>
+                <FleetOverview />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/fleet/maintenance" element={
+            <ProtectedRoute>
+              <Layout>
+                <Maintenance />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/fleet/inspections" element={
+            <ProtectedRoute>
+              <Layout>
+                <Inspections />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/fleet/utilization" element={
+            <ProtectedRoute>
+              <Layout>
+                <Utilization />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/fleet/alerts" element={
+            <ProtectedRoute>
+              <Layout>
+                <Alerts />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Driver Management */}
-          <Route path="/drivers" element={<DriverOverview />} />
-          <Route path="/drivers/documents" element={<Documents />} />
-          <Route path="/drivers/training" element={<Training />} />
+          <Route path="/drivers" element={
+            <ProtectedRoute>
+              <Layout>
+                <DriverOverview />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/drivers/documents" element={
+            <ProtectedRoute>
+              <Layout>
+                <Documents />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/drivers/training" element={
+            <ProtectedRoute>
+              <Layout>
+                <Training />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Scheduling & Attendance */}
-          <Route path="/scheduling" element={<ShiftScheduling />} />
-          <Route path="/scheduling/attendance" element={<Attendance />} />
-          <Route path="/scheduling/routes" element={<RouteAssignment />} />
+          <Route path="/scheduling" element={
+            <ProtectedRoute>
+              <Layout>
+                <ShiftScheduling />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/scheduling/attendance" element={
+            <ProtectedRoute>
+              <Layout>
+                <Attendance />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/scheduling/routes" element={
+            <ProtectedRoute>
+              <Layout>
+                <RouteAssignment />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Payroll & Incentives */}
-          <Route path="/payroll" element={<PayrollManagement />} />
-          <Route path="/payroll/incentives" element={<Incentives />} />
+          <Route path="/payroll" element={
+            <ProtectedRoute>
+              <Layout>
+                <PayrollManagement />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/payroll/incentives" element={
+            <ProtectedRoute>
+              <Layout>
+                <Incentives />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Dispatch & Operations */}
-          <Route path="/dispatch" element={<RouteMonitoring />} />
-          <Route path="/dispatch/rescue" element={<RescueOperations />} />
-          <Route path="/dispatch/metrics" element={<StationMetrics />} />
+          <Route path="/dispatch" element={
+            <ProtectedRoute>
+              <Layout>
+                <RouteMonitoring />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/dispatch/rescue" element={
+            <ProtectedRoute>
+              <Layout>
+                <RescueOperations />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/dispatch/metrics" element={
+            <ProtectedRoute>
+              <Layout>
+                <StationMetrics />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Safety & Compliance */}
-          <Route path="/safety" element={<IncidentReporting />} />
-          <Route path="/safety/coaching" element={<SafetyCoaching />} />
-          <Route path="/safety/compliance" element={<ComplianceTracking />} />
+          <Route path="/safety" element={
+            <ProtectedRoute>
+              <Layout>
+                <IncidentReporting />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/safety/coaching" element={
+            <ProtectedRoute>
+              <Layout>
+                <SafetyCoaching />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/safety/compliance" element={
+            <ProtectedRoute>
+              <Layout>
+                <ComplianceTracking />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Package Exceptions */}
-          <Route path="/packages" element={<RTSTracking />} />
-          <Route path="/packages/lost" element={<LostPackages />} />
+          <Route path="/packages" element={
+            <ProtectedRoute>
+              <Layout>
+                <RTSTracking />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/packages/lost" element={
+            <ProtectedRoute>
+              <Layout>
+                <LostPackages />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Inventory Management */}
-          <Route path="/inventory" element={<AssetManagement />} />
-          <Route path="/inventory/damage" element={<DamageTracking />} />
+          <Route path="/inventory" element={
+            <ProtectedRoute>
+              <Layout>
+                <AssetManagement />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/inventory/damage" element={
+            <ProtectedRoute>
+              <Layout>
+                <DamageTracking />
+              </Layout>
+            </ProtectedRoute>
+          } />
 
           {/* Analytics & Reporting */}
-          <Route path="/analytics" element={<AnalyticsDashboard />} />
+          <Route path="/analytics" element={
+            <ProtectedRoute>
+              <Layout>
+                <AnalyticsDashboard />
+              </Layout>
+            </ProtectedRoute>
+          } />
         </Routes>
-      </Layout>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

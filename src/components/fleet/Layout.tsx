@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Truck, Users, FileText, GraduationCap, Wrench, ClipboardCheck, BarChart3, Bell, Calendar, Clock, DollarSign, Award, MapPin, Map, Shield, PackageX, Package, TrendingUp, Activity, AlertTriangle, Search, AlertCircle } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Truck, Users, FileText, GraduationCap, Wrench, ClipboardCheck, BarChart3, Bell, Calendar, Clock, DollarSign, Award, MapPin, Map, Shield, PackageX, Package, TrendingUp, Activity, AlertTriangle, Search, AlertCircle, LogOut, User, Settings } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,6 +9,13 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -30,15 +38,15 @@ export default function Layout({ children }: LayoutProps) {
   // Sidebar main sections
   const sidebarSections = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-    { name: 'Fleet Management', href: '/fleet', icon: Truck },
-    { name: 'Driver Management', href: '/drivers', icon: Users },
-    { name: 'Scheduling & Attendance', href: '/scheduling', icon: Calendar },
-    { name: 'Payroll & Incentives', href: '/payroll', icon: DollarSign },
-    { name: 'Dispatch & Operations', href: '/dispatch', icon: Map },
-    { name: 'Safety & Compliance', href: '/safety', icon: Shield },
-    { name: 'Package Exceptions', href: '/packages', icon: PackageX },
-    { name: 'Inventory Management', href: '/inventory', icon: Package },
-    { name: 'Analytics & Reporting', href: '/analytics', icon: TrendingUp },
+    { name: 'Fleet', href: '/fleet', icon: Truck },
+    { name: 'Drivers', href: '/drivers', icon: Users },
+    { name: 'Scheduling', href: '/scheduling', icon: Calendar },
+    { name: 'Payroll', href: '/payroll', icon: DollarSign },
+    { name: 'Dispatch', href: '/dispatch', icon: Map },
+    { name: 'Safety', href: '/safety', icon: Shield },
+    { name: 'Packages', href: '/packages', icon: PackageX },
+    { name: 'Inventory', href: '/inventory', icon: Package },
+    { name: 'Analytics', href: '/analytics', icon: TrendingUp },
   ];
 
   const fleetNav = [
@@ -115,9 +123,9 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
+      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col h-screen sticky top-0">
         {/* Header */}
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-gray-200 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
               <Truck className="w-6 h-6 text-white" />
@@ -152,10 +160,65 @@ export default function Layout({ children }: LayoutProps) {
             })}
           </div>
         </nav>
+
+        {/* Logout Button - Fixed at Bottom */}
+        <div className="p-4 border-t border-gray-200 flex-shrink-0">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors w-full"
+          >
+            <LogOut className="w-5 h-5" />
+            Logout
+          </button>
+        </div>
       </aside>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
+        {/* Top Header with User Profile */}
+        <div className="bg-white border-b border-gray-200 px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <h2 className="text-xl font-semibold text-gray-900">
+                {isDashboard && 'Dashboard'}
+                {isFleetSection && 'Fleet Management'}
+                {isDriversSection && 'Driver Management'}
+                {isSchedulingSection && 'Scheduling & Attendance'}
+                {isPayrollSection && 'Payroll & Incentives'}
+                {isDispatchSection && 'Dispatch & Operations'}
+                {isSafetySection && 'Safety & Compliance'}
+                {isPackagesSection && 'Package Exceptions'}
+                {isInventorySection && 'Inventory Management'}
+                {isAnalyticsSection && 'Analytics & Reporting'}
+              </h2>
+              <p className="text-sm text-gray-500 mt-0.5">Welcome back, manage your operations</p>
+            </div>
+            <div className="flex items-center gap-4">
+              {/* Notifications */}
+              <button className="relative p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+
+              {/* Settings */}
+              <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                <Settings className="w-5 h-5" />
+              </button>
+
+              {/* User Profile */}
+              <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
+                <div className="text-right">
+                  <p className="text-sm font-medium text-gray-900">John Smith</p>
+                  <p className="text-xs text-gray-500">DSP Manager</p>
+                </div>
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+                  <User className="w-5 h-5 text-white" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Top Navigation Bar - Only show when not on Dashboard */}
         {!isDashboard && (
           <div className="bg-white border-b border-gray-200">
@@ -182,7 +245,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         )}
 
-        <main className="flex-1 overflow-y-auto p-8">
+        <main className="flex-1 overflow-y-auto p-8 bg-gray-50">
           {children}
         </main>
       </div>

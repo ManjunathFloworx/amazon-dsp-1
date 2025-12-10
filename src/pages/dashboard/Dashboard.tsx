@@ -91,10 +91,47 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
-        <p className="text-sm text-gray-500 mt-1">Real-time insights for your DSP operations</p>
+      {/* Quick Actions */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <button className="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md hover:border-blue-300 transition-all group">
+          <div className="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
+            <Truck className="w-5 h-5 text-blue-600" />
+          </div>
+          <div className="text-left">
+            <p className="text-xs text-gray-500">Quick Add</p>
+            <p className="text-sm font-semibold text-gray-900">New Vehicle</p>
+          </div>
+        </button>
+
+        <button className="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md hover:border-green-300 transition-all group">
+          <div className="p-2 bg-green-50 rounded-lg group-hover:bg-green-100 transition-colors">
+            <Users className="w-5 h-5 text-green-600" />
+          </div>
+          <div className="text-left">
+            <p className="text-xs text-gray-500">Quick Add</p>
+            <p className="text-sm font-semibold text-gray-900">New Driver</p>
+          </div>
+        </button>
+
+        <button className="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md hover:border-purple-300 transition-all group">
+          <div className="p-2 bg-purple-50 rounded-lg group-hover:bg-purple-100 transition-colors">
+            <Package className="w-5 h-5 text-purple-600" />
+          </div>
+          <div className="text-left">
+            <p className="text-xs text-gray-500">View</p>
+            <p className="text-sm font-semibold text-gray-900">Packages</p>
+          </div>
+        </button>
+
+        <button className="flex items-center gap-3 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md hover:border-red-300 transition-all group">
+          <div className="p-2 bg-red-50 rounded-lg group-hover:bg-red-100 transition-colors">
+            <AlertCircle className="w-5 h-5 text-red-600" />
+          </div>
+          <div className="text-left">
+            <p className="text-xs text-gray-500">View</p>
+            <p className="text-sm font-semibold text-gray-900">All Alerts</p>
+          </div>
+        </button>
       </div>
 
       {/* Stats Grid */}
