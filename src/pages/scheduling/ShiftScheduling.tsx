@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { Calendar, Users, Clock, AlertCircle, Plus, Search } from 'lucide-react';
+import { Calendar, Users, Clock, AlertCircle, Plus, Search, Edit, Trash2, Copy } from 'lucide-react';
 import type { Shift, ScheduleStats } from '../../types/scheduling';
+import AddShiftModal from '../../components/modals/AddShiftModal';
 
 export default function ShiftScheduling() {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [selectedWave, setSelectedWave] = useState<number | 'all'>('all');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Mock data - replace with actual API calls
   const stats: ScheduleStats = {
@@ -45,8 +48,31 @@ export default function ShiftScheduling() {
     },
   ];
 
-  const filteredShifts =
-    selectedWave === 'all' ? shifts : shifts.filter((s) => s.wave === selectedWave);
+  const filteredShifts = shifts
+    .filter((s) => selectedWave === 'all' || s.wave === selectedWave)
+    .filter(
+      (s) =>
+        searchQuery === '' ||
+        s.driverName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        s.routeName?.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+
+  const handleAddShift = (shift: any) => {
+    console.log('Adding shift:', shift);
+    // Add API call here
+  };
+
+  const handleDeleteShift = (shiftId: string) => {
+    if (confirm('Are you sure you want to delete this shift?')) {
+      console.log('Deleting shift:', shiftId);
+      // Add API call here
+    }
+  };
+
+  const handleCopyShift = (shift: Shift) => {
+    console.log('Copying shift:', shift);
+    // Add logic to copy shift
+  };
 
   return (
     <div className="space-y-6">
@@ -56,10 +82,15 @@ export default function ShiftScheduling() {
           <h1 className="text-2xl font-bold text-gray-900">Shift Scheduling</h1>
           <p className="text-sm text-gray-600 mt-1">Manage driver schedules and assignments</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          <Plus className="w-4 h-4" />
-          Add Shift
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setIsAddModalOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            Add Shift
+          </button>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -148,6 +179,8 @@ export default function ShiftScheduling() {
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search driver or route..."
                 className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
@@ -232,17 +265,55 @@ export default function ShiftScheduling() {
                       {shift.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-right">
-                    <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                      Edit
-                    </button>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center justify-end gap-2">
+                      <button
+                        onClick={() => handleCopyShift(shift)}
+                        className="p-1.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                        title="Copy shift"
+                      >
+                        <Copy className="w-4 h-4" />
+                      </button>
+                      <button
+                        className="p-1.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                        title="Edit shift"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteShift(shift.id)}
+                        className="p-1.5 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                        title="Delete shift"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        {filteredShifts.length === 0 && (
+          <div className="p-12 text-center">
+            <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+            <h3 className="text-sm font-medium text-gray-900 mb-1">No shifts found</h3>
+            <p className="text-sm text-gray-500">
+              {searchQuery
+                ? 'Try adjusting your search or filters'
+                : 'Get started by adding a new shift'}
+            </p>
+          </div>
+        )}
       </div>
+
+      {/* Add Shift Modal */}
+      <AddShiftModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSubmit={handleAddShift}
+      />
     </div>
   );
 }

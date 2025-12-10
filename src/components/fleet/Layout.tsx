@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Truck, Users, FileText, GraduationCap, Wrench, ClipboardCheck, BarChart3, Bell, Calendar, Clock, DollarSign, Award, MapPin } from 'lucide-react';
+import { LayoutDashboard, Truck, Users, FileText, GraduationCap, Wrench, ClipboardCheck, BarChart3, Bell, Calendar, Clock, DollarSign, Award, MapPin, Map, Shield, PackageX, Package, TrendingUp, Activity, AlertTriangle, Search, AlertCircle } from 'lucide-react';
 
 interface LayoutProps {
   children: ReactNode;
@@ -21,6 +21,11 @@ export default function Layout({ children }: LayoutProps) {
   const isDriversSection = location.pathname.startsWith('/drivers');
   const isSchedulingSection = location.pathname.startsWith('/scheduling');
   const isPayrollSection = location.pathname.startsWith('/payroll');
+  const isDispatchSection = location.pathname.startsWith('/dispatch');
+  const isSafetySection = location.pathname.startsWith('/safety');
+  const isPackagesSection = location.pathname.startsWith('/packages');
+  const isInventorySection = location.pathname.startsWith('/inventory');
+  const isAnalyticsSection = location.pathname.startsWith('/analytics');
 
   // Sidebar main sections
   const sidebarSections = [
@@ -29,6 +34,11 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Driver Management', href: '/drivers', icon: Users },
     { name: 'Scheduling & Attendance', href: '/scheduling', icon: Calendar },
     { name: 'Payroll & Incentives', href: '/payroll', icon: DollarSign },
+    { name: 'Dispatch & Operations', href: '/dispatch', icon: Map },
+    { name: 'Safety & Compliance', href: '/safety', icon: Shield },
+    { name: 'Package Exceptions', href: '/packages', icon: PackageX },
+    { name: 'Inventory Management', href: '/inventory', icon: Package },
+    { name: 'Analytics & Reporting', href: '/analytics', icon: TrendingUp },
   ];
 
   const fleetNav = [
@@ -56,6 +66,32 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Incentives', href: '/payroll/incentives', icon: Award },
   ];
 
+  const dispatchNav = [
+    { name: 'Route Monitoring', href: '/dispatch', icon: Map },
+    { name: 'Rescue Operations', href: '/dispatch/rescue', icon: Activity },
+    { name: 'Station Metrics', href: '/dispatch/metrics', icon: BarChart3 },
+  ];
+
+  const safetyNav = [
+    { name: 'Incident Reporting', href: '/safety', icon: AlertTriangle },
+    { name: 'Safety Coaching', href: '/safety/coaching', icon: GraduationCap },
+    { name: 'Compliance Tracking', href: '/safety/compliance', icon: Shield },
+  ];
+
+  const packagesNav = [
+    { name: 'RTS Tracking', href: '/packages', icon: PackageX },
+    { name: 'Lost Packages', href: '/packages/lost', icon: Search },
+  ];
+
+  const inventoryNav = [
+    { name: 'Asset Management', href: '/inventory', icon: Package },
+    { name: 'Damage Tracking', href: '/inventory/damage', icon: AlertCircle },
+  ];
+
+  const analyticsNav = [
+    { name: 'Analytics Dashboard', href: '/analytics', icon: TrendingUp },
+  ];
+
   const currentNavItems = isFleetSection
     ? fleetNav
     : isDriversSection
@@ -64,7 +100,17 @@ export default function Layout({ children }: LayoutProps) {
         ? schedulingNav
         : isPayrollSection
           ? payrollNav
-          : [];
+          : isDispatchSection
+            ? dispatchNav
+            : isSafetySection
+              ? safetyNav
+              : isPackagesSection
+                ? packagesNav
+                : isInventorySection
+                  ? inventoryNav
+                  : isAnalyticsSection
+                    ? analyticsNav
+                    : [];
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
