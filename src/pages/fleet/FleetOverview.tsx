@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { mockVehicles, mockAlerts } from '../../data/mockData';
 import type { Vehicle } from '../../types/fleet';
-import { Search, Plus, AlertCircle, Calendar, Gauge } from 'lucide-react';
+import { Search, Plus, AlertCircle, Calendar, Gauge, Truck, Package } from 'lucide-react';
 import { format, differenceInDays } from 'date-fns';
 import AddVehicleModal from '../../components/modals/AddVehicleModal';
 
@@ -58,39 +58,108 @@ export default function FleetOverview() {
     return { text: `${days} days`, color: 'text-gray-600' };
   };
 
+  // Calculate expiring certifications (within 30 days)
+  const expiringInsurance = vehicles.filter((v) => {
+    const days = differenceInDays(v.insuranceExpiry, new Date());
+    return days >= 0 && days <= 30;
+  }).length;
+
+  const expiringRegistration = vehicles.filter((v) => {
+    const days = differenceInDays(v.registrationExpiry, new Date());
+    return days >= 0 && days <= 30;
+  }).length;
+
+  const totalExpiring = expiringInsurance + expiringRegistration;
+
+  // Calculate active alerts
+  const activeAlerts = mockAlerts.filter((a) => !a.resolved).length;
+
   const stats = [
     {
-      label: 'Total Vehicles',
-      value: vehicles.length,
-      color: 'bg-blue-50 text-blue-600',
+      label: 'Vehicle Status',
+      items: [
+        { label: 'Total', value: vehicles.length },
+        { label: 'Active', value: vehicles.filter((v) => v.status === 'active').length },
+        { label: 'Inactive', value: vehicles.filter((v) => v.status === 'inactive').length },
+        { label: 'Flagged', value: vehicles.filter((v) => v.status === 'flagged').length },
+      ],
+      gradient: 'from-blue-400 to-blue-200',
+      icon: Truck,
     },
     {
-      label: 'Active',
-      value: vehicles.filter((v) => v.status === 'active').length,
-      color: 'bg-green-50 text-green-600',
+      label: 'Amazon Branding',
+      items: [
+        { label: 'Pending', value: vehicles.filter((v) => v.amazonBrandingStatus === 'pending').length },
+        { label: 'Branded', value: vehicles.filter((v) => v.amazonBrandingStatus === 'branded').length },
+        { label: 'Unbranded', value: vehicles.filter((v) => v.amazonBrandingStatus === 'unbranded').length },
+      ],
+      gradient: 'from-blue-400 to-blue-200',
+      icon: Package,
     },
     {
-      label: 'In Maintenance',
-      value: vehicles.filter((v) => v.status === 'maintenance').length,
-      color: 'bg-yellow-50 text-yellow-600',
+      label: 'Certification Expires',
+      items: [
+        { label: 'Insurance', value: expiringInsurance },
+        { label: 'Registration', value: expiringRegistration },
+        { label: 'Total Expiring', value: totalExpiring },
+      ],
+      gradient: 'from-blue-400 to-blue-200',
+      icon: Calendar,
     },
     {
-      label: 'Flagged',
-      value: vehicles.filter((v) => v.status === 'flagged').length,
-      color: 'bg-red-50 text-red-600',
+      label: 'Alerts',
+      items: [
+        { label: 'Active Alerts', value: activeAlerts },
+      ],
+      gradient: 'from-blue-400 to-blue-200',
+      icon: AlertCircle,
     },
   ];
 
   return (
     <div className="space-y-6">
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {stats.map((stat) => (
-          <div key={stat.label} className="bg-white rounded-lg border border-gray-200 p-6">
-            <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-            <p className={`text-3xl font-bold ${stat.color}`}>{stat.value}</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
+          return (
+            <div key={stat.label} className="group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100">
+              {/* Gradient Header */}
+              <div className={`bg-gradient-to-r ${stat.gradient} p-5`}>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl border border-white/30 shadow-lg">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+                <h3 className="text-base font-bold text-white drop-shadow-lg">{stat.label}</h3>
+              </div>
+
+              {/* Content */}
+              <div className="p-5 bg-white">
+                <div className="space-y-3">
+                  {stat.items.map((item, index) => (
+                    <div
+                      key={item.label}
+                      className={`flex items-center justify-between p-3 rounded-lg transition-all duration-300 ${
+                        index === 0 ? 'bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200' : 'bg-gray-50 hover:bg-gray-100'
+                      }`}
+                    >
+                      <span className={`text-sm ${index === 0 ? 'font-semibold text-gray-800' : 'font-medium text-gray-600'}`}>
+                        {item.label}
+                      </span>
+                      <span className={`text-xl font-bold ${index === 0 ? 'text-gray-900' : 'text-gray-700'}`}>
+                        {item.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Shine Effect on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Search and Actions */}

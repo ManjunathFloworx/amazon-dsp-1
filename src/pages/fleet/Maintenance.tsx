@@ -91,8 +91,7 @@ export default function Maintenance() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Preventive Maintenance</h1>
+      <div className="flex items-center justify-end">
         <button
           onClick={() => setIsScheduleModalOpen(true)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
