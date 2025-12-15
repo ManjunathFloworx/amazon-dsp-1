@@ -76,24 +76,6 @@ export default function PayrollManagement() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Payroll Management</h1>
-          <p className="text-sm text-gray-600 mt-1">
-            Calculate wages, overtime, and manage payroll
-          </p>
-        </div>
-        <div className="flex gap-2">
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-            <Download className="w-4 h-4" />
-            Export to Excel
-          </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-            <FileText className="w-4 h-4" />
-            Process Payroll
-          </button>
-        </div>
-      </div>
 
       {/* Pay Period Selector */}
       <div className="bg-white p-4 rounded-lg border border-gray-200">
@@ -102,21 +84,19 @@ export default function PayrollManagement() {
           <div className="flex gap-2">
             <button
               onClick={() => setPayPeriod('previous')}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                payPeriod === 'previous'
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${payPeriod === 'previous'
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               Previous Period
             </button>
             <button
               onClick={() => setPayPeriod('current')}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                payPeriod === 'current'
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${payPeriod === 'current'
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               Current Period
             </button>
@@ -225,6 +205,19 @@ export default function PayrollManagement() {
         </div>
       </div>
 
+      <div className="flex items-center justify-end">
+        <div className="flex gap-2">
+          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+            <Download className="w-4 h-4" />
+            Export to Excel
+          </button>
+          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <FileText className="w-4 h-4" />
+            Process Payroll
+          </button>
+        </div>
+      </div>
+
       {/* Payroll Records Table */}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
@@ -290,13 +283,12 @@ export default function PayrollManagement() {
                   </td>
                   <td className="px-4 py-3">
                     <span
-                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                        record.status === 'approved'
+                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${record.status === 'approved'
                           ? 'bg-green-100 text-green-700'
                           : record.status === 'paid'
                             ? 'bg-blue-100 text-blue-700'
                             : 'bg-yellow-100 text-yellow-700'
-                      }`}
+                        }`}
                     >
                       {record.status}
                     </span>

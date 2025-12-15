@@ -67,10 +67,10 @@ export default function AttendancePage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
+      {/* <div>
         <h1 className="text-2xl font-bold text-gray-900">Attendance Tracking</h1>
         <p className="text-sm text-gray-600 mt-1">Monitor clock in/out and GPS validation</p>
-      </div>
+      </div> */}
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">

@@ -153,47 +153,35 @@ export default function Incentives() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Incentive Management</h1>
-          <p className="text-sm text-gray-600 mt-1">Track and manage performance incentives</p>
-        </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          <Plus className="w-4 h-4" />
-          Add Incentive
-        </button>
-      </div>
+
 
       {/* Period Selector */}
       <div className="bg-white p-4 rounded-lg border border-gray-200">
         <div className="flex gap-2">
           <button
             onClick={() => setSelectedPeriod('week')}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-              selectedPeriod === 'week'
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedPeriod === 'week'
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+              }`}
           >
             This Week
           </button>
           <button
             onClick={() => setSelectedPeriod('month')}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-              selectedPeriod === 'month'
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedPeriod === 'month'
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+              }`}
           >
             This Month
           </button>
           <button
             onClick={() => setSelectedPeriod('quarter')}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-              selectedPeriod === 'quarter'
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedPeriod === 'quarter'
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+              }`}
           >
             This Quarter
           </button>
@@ -234,6 +222,13 @@ export default function Incentives() {
           <div className="text-xl font-bold">{stats.topEarner}</div>
           <div className="text-sm text-yellow-100 mt-1">${stats.topEarnerAmount} earned</div>
         </div>
+      </div>
+
+      <div className="flex items-center justify-end">
+        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <Plus className="w-4 h-4" />
+          Add Incentive
+        </button>
       </div>
 
       {/* Incentive Rules */}

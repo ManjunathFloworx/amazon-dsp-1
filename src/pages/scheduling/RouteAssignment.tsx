@@ -83,19 +83,6 @@ export default function RouteAssignment() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Route Assignment</h1>
-          <p className="text-sm text-gray-600 mt-1">
-            Import manifests and assign routes to drivers
-          </p>
-        </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          <Upload className="w-4 h-4" />
-          Import Manifest
-        </button>
-      </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -132,6 +119,13 @@ export default function RouteAssignment() {
         </div>
       </div>
 
+      <div className="flex items-center justify-end">
+        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <Upload className="w-4 h-4" />
+          Import Manifest
+        </button>
+      </div>
+
       {/* Wave Filter */}
       <div className="bg-white p-4 rounded-lg border border-gray-200">
         <div className="flex items-center gap-4">
@@ -139,41 +133,37 @@ export default function RouteAssignment() {
           <div className="flex gap-2">
             <button
               onClick={() => setSelectedWave('all')}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                selectedWave === 'all'
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedWave === 'all'
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               All Waves
             </button>
             <button
               onClick={() => setSelectedWave(1)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                selectedWave === 1
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedWave === 1
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               Wave 1
             </button>
             <button
               onClick={() => setSelectedWave(2)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                selectedWave === 2
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedWave === 2
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               Wave 2
             </button>
             <button
               onClick={() => setSelectedWave(3)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                selectedWave === 3
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedWave === 3
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               Wave 3
             </button>
@@ -193,11 +183,10 @@ export default function RouteAssignment() {
                 draggable={route.status === 'unassigned'}
                 onDragStart={() => handleDragStart(route.id)}
                 onDragEnd={handleDragEnd}
-                className={`bg-white p-4 rounded-lg border-2 transition-all ${
-                  route.status === 'unassigned'
+                className={`bg-white p-4 rounded-lg border-2 transition-all ${route.status === 'unassigned'
                     ? 'border-gray-200 hover:border-blue-400 cursor-move'
                     : 'border-green-200 bg-green-50'
-                } ${draggedRoute === route.id ? 'opacity-50' : ''}`}
+                  } ${draggedRoute === route.id ? 'opacity-50' : ''}`}
               >
                 <div className="flex items-start justify-between mb-2">
                   <div>
@@ -205,13 +194,12 @@ export default function RouteAssignment() {
                     <div className="text-sm text-gray-500">{route.manifestId}</div>
                   </div>
                   <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      route.difficulty === 'easy'
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${route.difficulty === 'easy'
                         ? 'bg-green-100 text-green-700'
                         : route.difficulty === 'medium'
                           ? 'bg-yellow-100 text-yellow-700'
                           : 'bg-red-100 text-red-700'
-                    }`}
+                      }`}
                   >
                     {route.difficulty}
                   </span>

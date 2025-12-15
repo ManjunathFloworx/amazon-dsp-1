@@ -67,46 +67,6 @@ export default function AnalyticsDashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
-          <p className="text-sm text-gray-600 mt-1">Comprehensive analytics and performance metrics</p>
-        </div>
-
-        {/* Period Selector */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setSelectedPeriod('today')}
-            className={`px-4 py-2 text-sm font-medium rounded-lg ${
-              selectedPeriod === 'today'
-                ? 'bg-blue-600 text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-            }`}
-          >
-            Today
-          </button>
-          <button
-            onClick={() => setSelectedPeriod('week')}
-            className={`px-4 py-2 text-sm font-medium rounded-lg ${
-              selectedPeriod === 'week'
-                ? 'bg-blue-600 text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-            }`}
-          >
-            This Week
-          </button>
-          <button
-            onClick={() => setSelectedPeriod('month')}
-            className={`px-4 py-2 text-sm font-medium rounded-lg ${
-              selectedPeriod === 'month'
-                ? 'bg-blue-600 text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-            }`}
-          >
-            This Month
-          </button>
-        </div>
-      </div>
 
       {/* Key Performance Indicators */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -161,6 +121,40 @@ export default function AnalyticsDashboard() {
         </div>
       </div>
 
+      <div className="flex items-center justify-end">
+
+        {/* Period Selector */}
+        <div className="flex gap-2">
+          <button
+            onClick={() => setSelectedPeriod('today')}
+            className={`px-4 py-2 text-sm font-medium rounded-lg ${selectedPeriod === 'today'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+              }`}
+          >
+            Today
+          </button>
+          <button
+            onClick={() => setSelectedPeriod('week')}
+            className={`px-4 py-2 text-sm font-medium rounded-lg ${selectedPeriod === 'week'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+              }`}
+          >
+            This Week
+          </button>
+          <button
+            onClick={() => setSelectedPeriod('month')}
+            className={`px-4 py-2 text-sm font-medium rounded-lg ${selectedPeriod === 'month'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+              }`}
+          >
+            This Month
+          </button>
+        </div>
+      </div>
+
       {/* Driver Performance */}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
@@ -183,11 +177,10 @@ export default function AnalyticsDashboard() {
                 <tr key={driver.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <span className={`w-8 h-8 flex items-center justify-center rounded-full font-bold ${
-                        driver.rank === 1 ? 'bg-yellow-100 text-yellow-700' :
-                        driver.rank === 2 ? 'bg-gray-100 text-gray-700' :
-                        'bg-orange-100 text-orange-700'
-                      }`}>
+                      <span className={`w-8 h-8 flex items-center justify-center rounded-full font-bold ${driver.rank === 1 ? 'bg-yellow-100 text-yellow-700' :
+                          driver.rank === 2 ? 'bg-gray-100 text-gray-700' :
+                            'bg-orange-100 text-orange-700'
+                        }`}>
                         {driver.rank}
                       </span>
                     </div>

@@ -150,11 +150,52 @@ export default function AssetManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Asset Management</h1>
-          <p className="text-sm text-gray-600 mt-1">Manage uniforms, devices, and equipment inventory</p>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <button
+          onClick={() => setSelectedTab('all')}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedTab === 'all' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
+        >
+          <div className="text-sm text-gray-600 mb-1">Total Assets</div>
+          <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
+        </button>
+
+        <button
+          onClick={() => setSelectedTab('assigned')}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedTab === 'assigned' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
+        >
+          <div className="text-sm text-gray-600 mb-1">Assigned</div>
+          <div className="text-2xl font-bold text-blue-700">{stats.assigned}</div>
+        </button>
+
+        <button
+          onClick={() => setSelectedTab('available')}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedTab === 'available' ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
+        >
+          <div className="text-sm text-gray-600 mb-1">Available</div>
+          <div className="text-2xl font-bold text-green-700">{stats.available}</div>
+        </button>
+
+        <button
+          onClick={() => setSelectedTab('damaged')}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedTab === 'damaged' ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
+        >
+          <div className="text-sm text-gray-600 mb-1">Damaged</div>
+          <div className="text-2xl font-bold text-red-700">{stats.damaged}</div>
+        </button>
+
+        <div className="p-4 rounded-lg border-2 border-gray-200 bg-white">
+          <div className="text-sm text-gray-600 mb-1">Total Value</div>
+          <div className="text-2xl font-bold text-gray-900">${stats.totalValue.toFixed(2)}</div>
         </div>
+      </div>
+
+      <div className="flex items-center justify-end">
         <div className="flex gap-2">
           <button
             onClick={() => setShowAddAssetModal(true)}
@@ -170,54 +211,6 @@ export default function AssetManagement() {
             <User className="w-4 h-4" />
             Assign Asset
           </button>
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <button
-          onClick={() => setSelectedTab('all')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedTab === 'all' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
-        >
-          <div className="text-sm text-gray-600 mb-1">Total Assets</div>
-          <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
-        </button>
-
-        <button
-          onClick={() => setSelectedTab('assigned')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedTab === 'assigned' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
-        >
-          <div className="text-sm text-gray-600 mb-1">Assigned</div>
-          <div className="text-2xl font-bold text-blue-700">{stats.assigned}</div>
-        </button>
-
-        <button
-          onClick={() => setSelectedTab('available')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedTab === 'available' ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
-        >
-          <div className="text-sm text-gray-600 mb-1">Available</div>
-          <div className="text-2xl font-bold text-green-700">{stats.available}</div>
-        </button>
-
-        <button
-          onClick={() => setSelectedTab('damaged')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedTab === 'damaged' ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
-        >
-          <div className="text-sm text-gray-600 mb-1">Damaged</div>
-          <div className="text-2xl font-bold text-red-700">{stats.damaged}</div>
-        </button>
-
-        <div className="p-4 rounded-lg border-2 border-gray-200 bg-white">
-          <div className="text-sm text-gray-600 mb-1">Total Value</div>
-          <div className="text-2xl font-bold text-gray-900">${stats.totalValue.toFixed(2)}</div>
         </div>
       </div>
 

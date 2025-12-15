@@ -79,16 +79,6 @@ export default function Inspections() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      {/* <div className="flex items-center justify-end">
-        <button
-          onClick={() => setIsNewInspectionModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <Plus className="w-4 h-4" />
-          New Inspection
-        </button>
-      </div> */}
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

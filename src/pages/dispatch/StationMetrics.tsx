@@ -112,10 +112,6 @@ export default function StationMetricsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Station Metrics</h1>
-          <p className="text-sm text-gray-600 mt-1">Track station performance and delivery metrics</p>
-        </div>
 
         {/* Period Selector */}
         <div className="flex gap-2">

@@ -76,22 +76,6 @@ export default function ShiftScheduling() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Shift Scheduling</h1>
-          <p className="text-sm text-gray-600 mt-1">Manage driver schedules and assignments</p>
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            Add Shift
-          </button>
-        </div>
-      </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -141,6 +125,18 @@ export default function ShiftScheduling() {
             Backup Needed
           </div>
           <div className="text-2xl font-bold text-red-600">{stats.backupNeeded}</div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-end">
+        <div className="flex gap-2">
+          <button
+            onClick={() => setIsAddModalOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            Add Shift
+          </button>
         </div>
       </div>
 
@@ -252,15 +248,14 @@ export default function ShiftScheduling() {
                   </td>
                   <td className="px-4 py-3">
                     <span
-                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                        shift.status === 'scheduled'
+                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${shift.status === 'scheduled'
                           ? 'bg-blue-100 text-blue-700'
                           : shift.status === 'in-progress'
                             ? 'bg-green-100 text-green-700'
                             : shift.status === 'completed'
                               ? 'bg-gray-100 text-gray-700'
                               : 'bg-red-100 text-red-700'
-                      }`}
+                        }`}
                     >
                       {shift.status}
                     </span>

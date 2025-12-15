@@ -105,54 +105,37 @@ export default function SafetyCoaching() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Safety Coaching</h1>
-          <p className="text-sm text-gray-600 mt-1">Track and document safety coaching sessions</p>
-        </div>
-        <button
-          onClick={() => setShowCoachingModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
-        >
-          <Plus className="w-4 h-4" />
-          New Coaching Session
-        </button>
-      </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <button
           onClick={() => setSelectedStatus('all')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'all' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'all' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Total Sessions</div>
           <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
         </button>
         <button
           onClick={() => setSelectedStatus('scheduled')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'scheduled' ? 'border-yellow-500 bg-yellow-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'scheduled' ? 'border-yellow-500 bg-yellow-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Scheduled</div>
           <div className="text-2xl font-bold text-yellow-700">{stats.scheduled}</div>
         </button>
         <button
           onClick={() => setSelectedStatus('completed')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'completed' ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'completed' ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Completed</div>
           <div className="text-2xl font-bold text-green-700">{stats.completed}</div>
         </button>
         <button
           onClick={() => setSelectedStatus('follow-up-needed')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'follow-up-needed' ? 'border-orange-500 bg-orange-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'follow-up-needed' ? 'border-orange-500 bg-orange-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Follow-Up Needed</div>
           <div className="text-2xl font-bold text-orange-700">{stats.followUpNeeded}</div>
@@ -161,6 +144,16 @@ export default function SafetyCoaching() {
           <div className="text-sm text-gray-600 mb-1">This Month</div>
           <div className="text-2xl font-bold text-gray-900">{stats.thisMonth}</div>
         </div>
+      </div>
+
+      <div className="flex items-center justify-end">
+        <button
+          onClick={() => setShowCoachingModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+        >
+          <Plus className="w-4 h-4" />
+          New Coaching Session
+        </button>
       </div>
 
       {/* Coaching Sessions List */}

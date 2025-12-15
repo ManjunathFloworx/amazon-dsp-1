@@ -68,10 +68,6 @@ export default function RescueOperations() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Rescue Operations</h1>
-        <p className="text-sm text-gray-600 mt-1">Manage and track rescue assignments</p>
-      </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

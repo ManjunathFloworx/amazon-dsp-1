@@ -108,66 +108,72 @@ export default function Training() {
         ))}
       </div>
 
-      {/* Tabs */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="border-b border-gray-200">
-          <div className="flex gap-1 p-1">
-            <button
-              onClick={() => setActiveTab('training')}
-              className={`flex-1 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-                activeTab === 'training'
-                  ? 'bg-blue-50 text-blue-600'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              <BookOpen className="w-4 h-4 inline-block mr-2" />
-              Training Courses
-            </button>
-            <button
-              onClick={() => setActiveTab('coaching')}
-              className={`flex-1 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-                activeTab === 'coaching'
-                  ? 'bg-blue-50 text-blue-600'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              <Award className="w-4 h-4 inline-block mr-2" />
-              Safety Coaching
-            </button>
-          </div>
+      {/* Tabs and Action Button */}
+      <div className="flex justify-between items-center gap-2">
+        <div className="flex gap-2">
+          <button
+            onClick={() => setActiveTab('training')}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+              activeTab === 'training'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+            }`}
+          >
+            <BookOpen className="w-4 h-4 inline-block mr-2" />
+            Training Courses
+          </button>
+          <button
+            onClick={() => setActiveTab('coaching')}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+              activeTab === 'coaching'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+            }`}
+          >
+            <Award className="w-4 h-4 inline-block mr-2" />
+            Safety Coaching
+          </button>
         </div>
 
-        {/* Search and Filters */}
-        <div className="p-4 border-b border-gray-200">
-          <div className="flex flex-col sm:flex-row gap-3">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder={activeTab === 'training' ? 'Search courses or drivers...' : 'Search coaching records...'}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            {activeTab === 'training' && (
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="all">All Status</option>
-                <option value="completed">Completed</option>
-                <option value="in_progress">In Progress</option>
-                <option value="not_started">Not Started</option>
-                <option value="failed">Failed</option>
-              </select>
-            )}
-          </div>
-        </div>
+        <button
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <BookOpen className="w-4 h-4" />
+          {activeTab === 'training' ? 'New Training' : 'New Coaching'}
+        </button>
+      </div>
 
-        {/* Content */}
-        <div className="p-4">
+      {/* Search and Filters */}
+      <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder={activeTab === 'training' ? 'Search courses or drivers...' : 'Search coaching records...'}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          {activeTab === 'training' && (
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="all">All Status</option>
+              <option value="completed">Completed</option>
+              <option value="in_progress">In Progress</option>
+              <option value="not_started">Not Started</option>
+              <option value="failed">Failed</option>
+            </select>
+          )}
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="bg-white rounded-lg border border-gray-200 p-4">
           {activeTab === 'training' ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {filteredTraining.map((item) => {
@@ -332,18 +338,17 @@ export default function Training() {
             </div>
           )}
 
-          {/* Empty State */}
-          {((activeTab === 'training' && filteredTraining.length === 0) ||
-            (activeTab === 'coaching' && filteredCoaching.length === 0)) && (
-            <div className="text-center py-12">
-              <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No records found</h3>
-              <p className="text-sm text-gray-500">
-                Try adjusting your search or filter criteria
-              </p>
-            </div>
-          )}
-        </div>
+        {/* Empty State */}
+        {((activeTab === 'training' && filteredTraining.length === 0) ||
+          (activeTab === 'coaching' && filteredCoaching.length === 0)) && (
+          <div className="text-center py-12">
+            <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No records found</h3>
+            <p className="text-sm text-gray-500">
+              Try adjusting your search or filter criteria
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

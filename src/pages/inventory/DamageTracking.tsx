@@ -108,27 +108,13 @@ export default function DamageTracking() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Damage & Loss Tracking</h1>
-          <p className="text-sm text-gray-600 mt-1">Track damaged devices and equipment with deductions</p>
-        </div>
-        <button
-          onClick={() => setShowReportModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
-        >
-          <Plus className="w-4 h-4" />
-          Report Damage
-        </button>
-      </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <button
           onClick={() => setSelectedStatus('all')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'all' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'all' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Total Reports</div>
           <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
@@ -136,9 +122,8 @@ export default function DamageTracking() {
 
         <button
           onClick={() => setSelectedStatus('reported')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'reported' ? 'border-yellow-500 bg-yellow-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'reported' ? 'border-yellow-500 bg-yellow-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Reported</div>
           <div className="text-2xl font-bold text-yellow-700">{stats.reported}</div>
@@ -146,9 +131,8 @@ export default function DamageTracking() {
 
         <button
           onClick={() => setSelectedStatus('assessed')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'assessed' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'assessed' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Assessed</div>
           <div className="text-2xl font-bold text-blue-700">{stats.assessed}</div>
@@ -156,12 +140,21 @@ export default function DamageTracking() {
 
         <button
           onClick={() => setSelectedStatus('deducted')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'deducted' ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'deducted' ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Deducted</div>
           <div className="text-2xl font-bold text-green-700">{stats.deducted}</div>
+        </button>
+      </div>
+
+      <div className="flex items-center justify-end">
+        <button
+          onClick={() => setShowReportModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+        >
+          <Plus className="w-4 h-4" />
+          Report Damage
         </button>
       </div>
 

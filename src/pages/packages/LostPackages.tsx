@@ -173,27 +173,13 @@ export default function LostPackages() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Lost Package Investigation</h1>
-          <p className="text-sm text-gray-600 mt-1">Investigate and resolve lost package cases</p>
-        </div>
-        <button
-          onClick={() => setShowReportModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
-        >
-          <Plus className="w-4 h-4" />
-          Report Lost Package
-        </button>
-      </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <button
           onClick={() => setSelectedStatus('all')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'all' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'all' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">All Cases</div>
           <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
@@ -201,9 +187,8 @@ export default function LostPackages() {
 
         <button
           onClick={() => setSelectedStatus('investigating')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'investigating' ? 'border-yellow-500 bg-yellow-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'investigating' ? 'border-yellow-500 bg-yellow-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Investigating</div>
           <div className="text-2xl font-bold text-yellow-700">{stats.investigating}</div>
@@ -211,9 +196,8 @@ export default function LostPackages() {
 
         <button
           onClick={() => setSelectedStatus('found')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'found' ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'found' ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Found</div>
           <div className="text-2xl font-bold text-green-700">{stats.found}</div>
@@ -221,12 +205,21 @@ export default function LostPackages() {
 
         <button
           onClick={() => setSelectedStatus('confirmed-lost')}
-          className={`p-4 rounded-lg border-2 text-left transition-colors ${
-            selectedStatus === 'confirmed-lost' ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-white hover:border-gray-300'
-          }`}
+          className={`p-4 rounded-lg border-2 text-left transition-colors ${selectedStatus === 'confirmed-lost' ? 'border-red-500 bg-red-50' : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
         >
           <div className="text-sm text-gray-600 mb-1">Confirmed Lost</div>
           <div className="text-2xl font-bold text-red-700">{stats.confirmedLost}</div>
+        </button>
+      </div>
+
+      <div className="flex items-center justify-end">
+        <button
+          onClick={() => setShowReportModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+        >
+          <Plus className="w-4 h-4" />
+          Report Lost Package
         </button>
       </div>
 
@@ -316,12 +309,10 @@ export default function LostPackages() {
                   {pkg.investigationSteps.map((step, index) => (
                     <div key={step.id} className="flex gap-3">
                       <div className="flex flex-col items-center">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                          index === pkg.investigationSteps.length - 1 ? 'bg-blue-600' : 'bg-gray-300'
-                        }`}>
-                          <CheckCircle2 className={`w-4 h-4 ${
-                            index === pkg.investigationSteps.length - 1 ? 'text-white' : 'text-gray-600'
-                          }`} />
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${index === pkg.investigationSteps.length - 1 ? 'bg-blue-600' : 'bg-gray-300'
+                          }`}>
+                          <CheckCircle2 className={`w-4 h-4 ${index === pkg.investigationSteps.length - 1 ? 'text-white' : 'text-gray-600'
+                            }`} />
                         </div>
                         {index < pkg.investigationSteps.length - 1 && (
                           <div className="w-0.5 h-full bg-gray-300 mt-1" />

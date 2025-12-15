@@ -89,19 +89,6 @@ export default function RTSTracking() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">RTS Tracking</h1>
-          <p className="text-sm text-gray-600 mt-1">Track return-to-station packages and accountability</p>
-        </div>
-        <button
-          onClick={() => setShowReportModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
-        >
-          <Plus className="w-4 h-4" />
-          Report RTS
-        </button>
-      </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -137,6 +124,16 @@ export default function RTSTracking() {
           <div className="text-2xl font-bold text-purple-700">{stats.amazonAccountable}</div>
           <div className="text-xs text-purple-600 mt-1">{((stats.amazonAccountable / stats.totalRTS) * 100).toFixed(0)}%</div>
         </div>
+      </div>
+
+      <div className="flex items-center justify-end">
+        <button
+          onClick={() => setShowReportModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+        >
+          <Plus className="w-4 h-4" />
+          Report RTS
+        </button>
       </div>
 
       {/* RTS Packages List */}

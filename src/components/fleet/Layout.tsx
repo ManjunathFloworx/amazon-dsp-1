@@ -237,16 +237,16 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <h2 className="text-xl font-semibold text-gray-900">
-                {isDashboard && 'DSP Owner'}
-                {isFleetSection && 'Fleet Manager'}
-                {isDriversSection && 'HR Manager'}
-                {isSchedulingSection && 'Operation Manager'}
-                {isPayrollSection && 'HR Manager'}
-                {isDispatchSection && 'Operation Manager'}
-                {isSafetySection && 'Operation Manager'}
-                {isPackagesSection && 'Operation Manager'}
-                {isInventorySection && 'HR Manager'}
-                {isAnalyticsSection && 'DSP Owner'}
+                {isDashboard && 'Dashboard (DSP Owner)'}
+                {isFleetSection && 'Fleet Management (Fleet Manager)'}
+                {isDriversSection && 'Driver Management (HR Manager)'}
+                {isSchedulingSection && 'Operation Management (Operation Manager)'}
+                {isPayrollSection && 'Payroll (HR Manager)'}
+                {isDispatchSection && 'Dispatch (Operation Manager)'}
+                {isSafetySection && 'Safety (Operation Manager)'}
+                {isPackagesSection && 'Packages (Operation Manager)'}
+                {isInventorySection && 'Inventory (HR Manager)'}
+                {isAnalyticsSection && 'Analytics (DSP Owner)'}
               </h2>
               <p className="text-sm text-gray-500 mt-0.5">Welcome back, manage your operations</p>
             </div>

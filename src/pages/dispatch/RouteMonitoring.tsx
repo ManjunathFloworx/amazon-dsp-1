@@ -61,10 +61,6 @@ export default function RouteMonitoring() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Route Monitoring</h1>
-        <p className="text-sm text-gray-600 mt-1">Real-time driver locations and route progress</p>
-      </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">

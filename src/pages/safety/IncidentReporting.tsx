@@ -97,19 +97,6 @@ export default function IncidentReporting() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Incident Reporting</h1>
-          <p className="text-sm text-gray-600 mt-1">Report and track accidents, complaints, and incidents</p>
-        </div>
-        <button
-          onClick={() => setShowReportModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
-        >
-          <Plus className="w-4 h-4" />
-          Report Incident
-        </button>
-      </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
@@ -166,6 +153,16 @@ export default function IncidentReporting() {
         >
           <div className="text-sm text-gray-600 mb-1">Vehicle Damage</div>
           <div className="text-2xl font-bold text-indigo-700">{stats.vehicleDamage}</div>
+        </button>
+      </div>
+
+            <div className="flex items-center justify-end">
+        <button
+          onClick={() => setShowReportModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+        >
+          <Plus className="w-4 h-4" />
+          Report Incident
         </button>
       </div>
 
