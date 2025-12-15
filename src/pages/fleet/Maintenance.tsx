@@ -91,15 +91,7 @@ export default function Maintenance() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-end">
-        <button
-          onClick={() => setIsScheduleModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <Plus className="w-4 h-4" />
-          Schedule Maintenance
-        </button>
-      </div>
+
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -120,20 +112,30 @@ export default function Maintenance() {
       </div>
 
       {/* Filters */}
-      <div className="flex gap-2">
-        {['all', 'scheduled', 'overdue', 'completed'].map((status) => (
-          <button
-            key={status}
-            onClick={() => setFilterStatus(status as typeof filterStatus)}
-            className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-              filterStatus === status
+      <div className="flex justify-between items-center gap-2">
+        <div className="flex gap-2">
+          {['all', 'scheduled', 'overdue', 'completed'].map((status) => (
+            <button
+              key={status}
+              onClick={() => setFilterStatus(status as typeof filterStatus)}
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${filterStatus === status
                 ? 'bg-blue-600 text-white'
                 : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-            }`}
+                }`}
+            >
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center justify-end">
+          <button
+            onClick={() => setIsScheduleModalOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            {status.charAt(0).toUpperCase() + status.slice(1)}
+            <Plus className="w-4 h-4" />
+            Schedule Maintenance
           </button>
-        ))}
+        </div>
       </div>
 
       {/* Maintenance Records */}

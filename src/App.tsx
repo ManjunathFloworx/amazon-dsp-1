@@ -76,10 +76,10 @@ function App() {
               </Layout>
             </ProtectedRoute>
           } />
-          <Route path="/fleet/maintenance" element={
+          <Route path="/fleet/utilization" element={
             <ProtectedRoute>
               <Layout>
-                <Maintenance />
+                <Utilization />
               </Layout>
             </ProtectedRoute>
           } />
@@ -90,10 +90,10 @@ function App() {
               </Layout>
             </ProtectedRoute>
           } />
-          <Route path="/fleet/utilization" element={
+          <Route path="/fleet/maintenance" element={
             <ProtectedRoute>
               <Layout>
-                <Utilization />
+                <Maintenance />
               </Layout>
             </ProtectedRoute>
           } />

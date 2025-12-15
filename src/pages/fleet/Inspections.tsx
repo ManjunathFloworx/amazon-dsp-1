@@ -80,7 +80,7 @@ export default function Inspections() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-end">
+      {/* <div className="flex items-center justify-end">
         <button
           onClick={() => setIsNewInspectionModalOpen(true)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -88,7 +88,7 @@ export default function Inspections() {
           <Plus className="w-4 h-4" />
           New Inspection
         </button>
-      </div>
+      </div> */}
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -109,20 +109,29 @@ export default function Inspections() {
       </div>
 
       {/* Filters */}
-      <div className="flex gap-2">
-        {['all', 'pre_trip', 'post_trip'].map((type) => (
-          <button
-            key={type}
-            onClick={() => setFilterType(type as typeof filterType)}
-            className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-              filterType === type
-                ? 'bg-blue-600 text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-            }`}
-          >
-            {type === 'all' ? 'All' : type.split('_').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-          </button>
-        ))}
+      <div className="flex justify-between items-center gap-2">
+        <div className="flex gap-2">
+          {['all', 'pre_trip', 'post_trip'].map((type) => (
+            <button
+              key={type}
+              onClick={() => setFilterType(type as typeof filterType)}
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${filterType === type
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                }`}
+            >
+              {type === 'all' ? 'All' : type.split('_').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+            </button>
+          ))}
+        </div>
+
+        <button
+          onClick={() => setIsNewInspectionModalOpen(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <Plus className="w-4 h-4" />
+          New Inspection
+        </button>
       </div>
 
       {/* Inspection Records */}
@@ -261,13 +270,12 @@ export default function Inspections() {
                   {selectedInspection.checklistItems.map((item) => (
                     <div
                       key={item.id}
-                      className={`p-3 rounded-lg border ${
-                        item.status === 'fail'
+                      className={`p-3 rounded-lg border ${item.status === 'fail'
                           ? 'bg-red-50 border-red-200'
                           : item.status === 'pass'
-                          ? 'bg-green-50 border-green-200'
-                          : 'bg-gray-50 border-gray-200'
-                      }`}
+                            ? 'bg-green-50 border-green-200'
+                            : 'bg-gray-50 border-gray-200'
+                        }`}
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -277,11 +285,10 @@ export default function Inspections() {
                             <p className="text-xs text-gray-700 mt-1">{item.notes}</p>
                           )}
                         </div>
-                        <span className={`text-xs font-bold ${
-                          item.status === 'fail' ? 'text-red-600' :
-                          item.status === 'pass' ? 'text-green-600' :
-                          'text-gray-600'
-                        }`}>
+                        <span className={`text-xs font-bold ${item.status === 'fail' ? 'text-red-600' :
+                            item.status === 'pass' ? 'text-green-600' :
+                              'text-gray-600'
+                          }`}>
                           {item.status.toUpperCase()}
                         </span>
                       </div>

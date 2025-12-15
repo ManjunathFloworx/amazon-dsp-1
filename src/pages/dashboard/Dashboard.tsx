@@ -104,7 +104,7 @@ export default function Dashboard() {
       `}</style>
 
       {/* Quick Actions with Glassmorphism */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <button className="group relative overflow-hidden glass-card p-4 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <div className="relative flex items-center gap-3">
@@ -156,7 +156,7 @@ export default function Dashboard() {
             </div>
           </div>
         </button>
-      </div>
+      </div> */}
 
       {/* Stats Grid with Beautiful Gradients */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

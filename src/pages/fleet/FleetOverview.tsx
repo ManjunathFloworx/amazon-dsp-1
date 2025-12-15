@@ -83,7 +83,7 @@ export default function FleetOverview() {
         { label: 'Inactive', value: vehicles.filter((v) => v.status === 'inactive').length },
         { label: 'Flagged', value: vehicles.filter((v) => v.status === 'flagged').length },
       ],
-      gradient: 'from-blue-400 to-blue-200',
+      color: 'bg-blue-50 text-blue-600',
       icon: Truck,
     },
     {
@@ -93,7 +93,7 @@ export default function FleetOverview() {
         { label: 'Branded', value: vehicles.filter((v) => v.amazonBrandingStatus === 'branded').length },
         { label: 'Unbranded', value: vehicles.filter((v) => v.amazonBrandingStatus === 'unbranded').length },
       ],
-      gradient: 'from-blue-400 to-blue-200',
+      color: 'bg-purple-50 text-purple-600',
       icon: Package,
     },
     {
@@ -103,7 +103,7 @@ export default function FleetOverview() {
         { label: 'Registration', value: expiringRegistration },
         { label: 'Total Expiring', value: totalExpiring },
       ],
-      gradient: 'from-blue-400 to-blue-200',
+      color: 'bg-orange-50 text-orange-600',
       icon: Calendar,
     },
     {
@@ -111,7 +111,7 @@ export default function FleetOverview() {
       items: [
         { label: 'Active Alerts', value: activeAlerts },
       ],
-      gradient: 'from-blue-400 to-blue-200',
+      color: 'bg-red-50 text-red-600',
       icon: AlertCircle,
     },
   ];
@@ -119,44 +119,37 @@ export default function FleetOverview() {
   return (
     <div className="space-y-6">
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
-            <div key={stat.label} className="group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100">
-              {/* Gradient Header */}
-              <div className={`bg-gradient-to-r ${stat.gradient} p-5`}>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl border border-white/30 shadow-lg">
-                    <Icon className="w-6 h-6 text-white" />
+            <div key={stat.label} className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="flex items-start gap-4">
+                {/* Left side - Icon and Label */}
+                <div className="flex flex-col items-center gap-2">
+                  <div className={`p-3 rounded-lg ${stat.color}`}>
+                    <Icon className="w-6 h-6" />
                   </div>
+                  <p className="text-xs text-gray-600 font-medium text-center whitespace-nowrap">{stat.label}</p>
                 </div>
-                <h3 className="text-base font-bold text-white drop-shadow-lg">{stat.label}</h3>
-              </div>
 
-              {/* Content */}
-              <div className="p-5 bg-white">
-                <div className="space-y-3">
+                {/* Right side - Stats */}
+                <div className="flex-1 space-y-2">
                   {stat.items.map((item, index) => (
                     <div
                       key={item.label}
-                      className={`flex items-center justify-between p-3 rounded-lg transition-all duration-300 ${
-                        index === 0 ? 'bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200' : 'bg-gray-50 hover:bg-gray-100'
-                      }`}
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                     >
-                      <span className={`text-sm ${index === 0 ? 'font-semibold text-gray-800' : 'font-medium text-gray-600'}`}>
+                      <span className="text-xs text-gray-600">
                         {item.label}
                       </span>
-                      <span className={`text-xl font-bold ${index === 0 ? 'text-gray-900' : 'text-gray-700'}`}>
+                      <span className={`text-lg font-bold ${index === 0 ? stat.color : 'text-gray-700'}`}>
                         {item.value}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-
-              {/* Shine Effect on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
             </div>
           );
         })}

@@ -51,9 +51,9 @@ export default function Layout({ children }: LayoutProps) {
 
   const fleetNav = [
     { name: 'Fleet Overview', href: '/fleet', icon: Truck },
-    { name: 'Maintenance', href: '/fleet/maintenance', icon: Wrench },
-    { name: 'Inspections', href: '/fleet/inspections', icon: ClipboardCheck },
     { name: 'Utilization', href: '/fleet/utilization', icon: BarChart3 },
+    { name: 'Inspections', href: '/fleet/inspections', icon: ClipboardCheck },
+    { name: 'Maintenance', href: '/fleet/maintenance', icon: Wrench },
     { name: 'Alerts', href: '/fleet/alerts', icon: Bell },
   ];
 
@@ -237,16 +237,16 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <h2 className="text-xl font-semibold text-gray-900">
-                {isDashboard && 'Dashboard'}
-                {isFleetSection && 'Fleet Management'}
-                {isDriversSection && 'Driver Management'}
-                {isSchedulingSection && 'Scheduling & Attendance'}
-                {isPayrollSection && 'Payroll & Incentives'}
-                {isDispatchSection && 'Dispatch & Operations'}
-                {isSafetySection && 'Safety & Compliance'}
-                {isPackagesSection && 'Package Exceptions'}
-                {isInventorySection && 'Inventory Management'}
-                {isAnalyticsSection && 'Analytics & Reporting'}
+                {isDashboard && 'DSP Owner'}
+                {isFleetSection && 'Fleet Manager'}
+                {isDriversSection && 'HR Manager'}
+                {isSchedulingSection && 'Operation Manager'}
+                {isPayrollSection && 'HR Manager'}
+                {isDispatchSection && 'Operation Manager'}
+                {isSafetySection && 'Operation Manager'}
+                {isPackagesSection && 'Operation Manager'}
+                {isInventorySection && 'HR Manager'}
+                {isAnalyticsSection && 'DSP Owner'}
               </h2>
               <p className="text-sm text-gray-500 mt-0.5">Welcome back, manage your operations</p>
             </div>
