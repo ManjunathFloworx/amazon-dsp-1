@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Truck, Users, FileText, GraduationCap, Wrench, ClipboardCheck, BarChart3, Bell, Calendar, Clock, DollarSign, Award, MapPin, Map, Shield, PackageX, Package, TrendingUp, Activity, AlertTriangle, Search, AlertCircle, LogOut, User, Settings, Sparkles, Zap } from 'lucide-react';
+import { Truck, Users, FileText, GraduationCap, Wrench, ClipboardCheck, BarChart3, Bell, Calendar, Clock, DollarSign, Award, MapPin, Map, Shield, PackageX, Package, TrendingUp, Activity, AlertTriangle, Search, AlertCircle, LogOut, User, Settings, Sparkles, Zap } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface LayoutProps {
