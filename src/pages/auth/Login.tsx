@@ -19,7 +19,7 @@ export default function Login() {
     // Simulate login - accept any email/password
     setTimeout(() => {
       login(email);
-      navigate('/');
+      navigate('/analytics');
       setIsLoading(false);
     }, 800);
   };

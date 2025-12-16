@@ -37,7 +37,8 @@ export default function Layout({ children }: LayoutProps) {
 
   // Sidebar main sections
   const sidebarSections = [
-    { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    // { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { name: 'Analytics', href: '/analytics', icon: TrendingUp },
     { name: 'Fleet', href: '/fleet', icon: Truck },
     { name: 'Drivers', href: '/drivers', icon: Users },
     { name: 'Scheduling', href: '/scheduling', icon: Calendar },
@@ -46,7 +47,6 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Safety', href: '/safety', icon: Shield },
     { name: 'Packages', href: '/packages', icon: PackageX },
     { name: 'Inventory', href: '/inventory', icon: Package },
-    { name: 'Analytics', href: '/analytics', icon: TrendingUp },
   ];
 
   const fleetNav = [
@@ -64,9 +64,9 @@ export default function Layout({ children }: LayoutProps) {
   ];
 
   const schedulingNav = [
+    { name: 'Route Assignment', href: '/scheduling/routes', icon: MapPin },
     { name: 'Shift Scheduling', href: '/scheduling', icon: Calendar },
     { name: 'Attendance', href: '/scheduling/attendance', icon: Clock },
-    { name: 'Route Assignment', href: '/scheduling/routes', icon: MapPin },
   ];
 
   const payrollNav = [
@@ -220,10 +220,10 @@ export default function Layout({ children }: LayoutProps) {
         <div className="p-4 border-t border-gray-200 flex-shrink-0">
           <button
             onClick={handleLogout}
-            className="group flex items-center gap-3 px-3 py-2 rounded-lg text-md font-medium text-gray-700 bg-red-200 hover:bg-red-300 transition-all duration-300 w-full hover:shadow-lg"
+            className="group flex items-center gap-3 px-3 py-2 border border-red-200 rounded-lg text-md font-medium text-red-700 bg-red-50 transition-all duration-300 w-full hover:shadow-lg"
           >
-            <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-            <span className="text-gray-800 group-hover:scale-125 group-hover:font-bold transition-all duration-300 origin-left">
+            <LogOut className="w-5 h-5" />
+            <span className="text-gray-800 origin-left text-red-700">
               Logout
             </span>
           </button>
